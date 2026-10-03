@@ -118,7 +118,8 @@ if (exp) {
 initCursor();
 initMagnetic();
 const text = initText({ reduced });
-initCart({ lenis, reduced, getFinish: () => necklaceFinish });
+let introReleased = false;
+const cart = initCart({ lenis, reduced, getFinish: () => necklaceFinish, canScroll: () => introReleased });
 initCollection({
   section: document.getElementById('kollektion'),
   reduced,
@@ -191,7 +192,8 @@ ready.then(() => {
 function skipIntro() {
   document.getElementById('loader').style.display = 'none';
   if (exp) exp.intro.t = 1;
-  lenis?.start();
+  introReleased = true;
+  if (!cart.isOpen()) lenis?.start();
 }
 
 function playIntro() {
@@ -207,5 +209,5 @@ function playIntro() {
   tl.from('.nav', { yPercent: -120, opacity: 0, duration: 1.1, ease: 'expo.out' }, 'open+=1.3');
   if (text.heroLines) tl.from(text.heroLines, { yPercent: 115, duration: 1.2, stagger: 0.09, ease: 'expo.out' }, 'open+=1.5');
   tl.from('.hero__where, .hero__from, .hero__scroll, .hero__edge', { opacity: 0, y: 24, duration: 1.1, stagger: 0.08, ease: 'expo.out' }, 'open+=1.7');
-  tl.add(() => lenis?.start(), 'open+=1.6');
+  tl.add(() => { introReleased = true; if (!cart.isOpen()) lenis?.start(); }, 'open+=1.6');
 }

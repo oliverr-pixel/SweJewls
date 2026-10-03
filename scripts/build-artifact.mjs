@@ -15,9 +15,10 @@ const js = assets.filter((f) => f.endsWith('.js')).map((f) => readFileSync(join(
 
 const body = html.split('<!--SWJ:BODY-START-->')[1].split('<!--SWJ:BODY-END-->')[0];
 const fonts = html.match(/<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com[^>]+>/)[0];
+const description = html.match(/<meta name="description"[^>]+>/)[0];
 
 const page = `<title>SweJewls</title>
-<meta name="description" content="Iced Cuban-kedjor och armband. Silverarmband 250 kr, guldarmband 300 kr, halsband 350 kr.">
+${description}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 ${fonts}

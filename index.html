@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SweJewls</title>
-<meta name="description" content="Iced Cuban-kedjor och armband. Diamantsilverarmband 250 kr, guldarmband 300 kr, halsband 350 kr. Blir inte grön, inte plast. Endast Stockholm, vi möts upp. Betala med Swish eller kontant. Beställ via sms: 076-328 20 09.">
+<meta name="description" content="Iced Cuban-kedjor och armband från 250 kr. Blir inte grön, inte plast. Endast Stockholm, vi möts upp. Swish eller kontant. Sms: 076-328 20 09.">
 <meta name="theme-color" content="#06070A">
 <meta property="og:title" content="SweJewls — iced kedjor & armband">
 <meta property="og:description" content="Inte äkta diamanter. Äkta känsla. Silverarmband 250 kr · Guldarmband 300 kr · Halsband 350 kr. Möts upp i Stockholm, Swish eller kontant.">
@@ -58,7 +58,7 @@
     <div class="hero__edge hero__edge--r" aria-hidden="true">Silver / Guld &mdash; N&deg; 01&ndash;03</div>
     <div class="hero__foot">
       <div class="hero__copy">
-        <p class="hero__where mono">Endast Stockholm &middot; möts upp &middot; Swish eller kontant</p>
+        <p class="hero__where mono">Endast&nbsp;Stockholm &middot; möts&nbsp;upp &middot; Swish&nbsp;eller&nbsp;kontant</p>
         <p class="hero__lead"><span class="split-lines">Iced kedjor <em>&amp;</em> armband.<br>Blir inte grön. Känns äkta.</span></p>
       </div>
       <a class="hero__from magnetic" href="#kollektion" data-scroll>
@@ -217,7 +217,7 @@
     <footer class="foot">
       <span class="foot__logo" data-logo="horizontal"></span>
       <p class="mono">Stenarna är simulerade diamanter, inte äkta.</p>
-      <p class="mono">Endast Stockholm &middot; möts upp &middot; Swish eller kontant</p>
+      <p class="mono">Endast&nbsp;Stockholm &middot; möts&nbsp;upp &middot; Swish&nbsp;eller&nbsp;kontant</p>
       <p class="mono">&copy; <span id="year">2026</span> SweJewls &middot; 076-328 20 09</p>
     </footer>
   </section>
@@ -225,12 +225,12 @@
 
 <aside class="cart" id="cart" role="dialog" aria-modal="true" aria-labelledby="cartTitle" hidden>
   <div class="cart__scrim" data-close-cart></div>
-  <div class="cart__panel">
+  <div class="cart__panel" data-lenis-prevent>
     <div class="cart__head">
       <h2 id="cartTitle">Korgen</h2>
       <button class="cart__close mono" type="button" data-close-cart>Stäng</button>
     </div>
-    <div class="cart__scroll" id="cartScroll" data-lenis-prevent>
+    <div class="cart__scroll" id="cartScroll">
       <ul class="cart__items" id="cartItems"></ul>
       <p class="cart__empty" id="cartEmpty">Korgen är tom. Lägg till ett armband eller halsband.</p>
       <form class="cart__form" id="cartForm" novalidate>
@@ -245,14 +245,15 @@
         </fieldset>
         <label for="orderNote">Meddelande <span>(valfritt)</span></label>
         <textarea id="orderNote" name="note" rows="2" placeholder="Var i Stockholm vill du mötas? Frågor?"></textarea>
+        <p class="cart__note">Vi möts upp i Stockholm, ingen frakt. Du betalar med Swish eller kontant.</p>
         <p class="cart__hint">Sms:et går till <b class="selectable">076-328 20 09</b>. Fungerar inte sms-knappen på din enhet, kopiera beställningen och skicka den själv.</p>
       </form>
     </div>
     <div class="cart__foot">
-      <p class="cart__where mono">Stockholm &middot; möts upp &middot; Swish eller kontant</p>
+      <p class="cart__where mono">Stockholm &middot; Swish&nbsp;eller&nbsp;kontant</p>
       <div class="cart__total"><span class="mono">Totalt</span><b id="cartTotal">0 kr</b></div>
-      <a class="btn btn--gold btn--wide" id="smsLink" href="sms:+46763282009"><span class="magnetic__inner">Skicka beställning som sms</span></a>
-      <button class="cart__copy mono" type="button" id="copyOrder">Kopiera beställningen</button>
+      <button class="cart__copy mono" type="button" id="copyOrder" aria-label="Kopiera beställningen">Kopiera</button>
+      <a class="btn btn--gold btn--wide cart__send" id="smsLink" href="sms:+46763282009"><span class="magnetic__inner">Skicka beställning som sms</span></a>
     </div>
   </div>
 </aside>
