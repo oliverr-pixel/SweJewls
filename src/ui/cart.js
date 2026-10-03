@@ -39,7 +39,7 @@ export function initCart({ lenis, getFinish, reduced }) {
       const p = PRODUCTS[i.id];
       return `${i.qty} st ${p.name}${i.finish ? ` (${i.finish.toLowerCase()})` : ''}: ${formatKr(p.price * i.qty)}`;
     });
-    let txt = `Hej SweJewls! Jag vill beställa:\n${lines.join('\n')}\nTotalt: ${formatKr(total())}`;
+    let txt = `Hej SweJewls! Jag vill beställa och mötas upp i Stockholm:\n${lines.join('\n')}\nTotalt: ${formatKr(total())}`;
     const name = nameIn.value.trim();
     const note = noteIn.value.trim();
     if (name) txt += `\nNamn: ${name}`;

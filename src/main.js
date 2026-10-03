@@ -206,6 +206,6 @@ function playIntro() {
   if (exp) tl.to(exp.intro, { t: 1, duration: 3.1, ease: 'none' }, 'open-=0.25');
   tl.from('.nav', { yPercent: -120, opacity: 0, duration: 1.1, ease: 'expo.out' }, 'open+=1.3');
   if (text.heroLines) tl.from(text.heroLines, { yPercent: 115, duration: 1.2, stagger: 0.09, ease: 'expo.out' }, 'open+=1.5');
-  tl.from('.hero__from, .hero__scroll, .hero__edge', { opacity: 0, y: 24, duration: 1.1, stagger: 0.08, ease: 'expo.out' }, 'open+=1.7');
+  tl.from('.hero__where, .hero__from, .hero__scroll, .hero__edge', { opacity: 0, y: 24, duration: 1.1, stagger: 0.08, ease: 'expo.out' }, 'open+=1.7');
   tl.add(() => lenis?.start(), 'open+=1.6');
 }

@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SweJewls</title>
-<meta name="description" content="Iced Cuban-kedjor och armband. Diamantsilverarmband 250 kr, guldarmband 300 kr, halsband 350 kr. Blir inte grön, inte plast. Beställ via SMS: 076-328 20 09.">
+<meta name="description" content="Iced Cuban-kedjor och armband. Diamantsilverarmband 250 kr, guldarmband 300 kr, halsband 350 kr. Blir inte grön, inte plast. Endast Stockholm, vi möts upp. Beställ via sms: 076-328 20 09.">
 <meta name="theme-color" content="#06070A">
 <meta property="og:title" content="SweJewls — iced kedjor & armband">
-<meta property="og:description" content="Inte äkta diamanter. Äkta känsla. Silverarmband 250 kr · Guldarmband 300 kr · Halsband 350 kr.">
+<meta property="og:description" content="Inte äkta diamanter. Äkta känsla. Silverarmband 250 kr · Guldarmband 300 kr · Halsband 350 kr. Möts upp i Stockholm.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://swejewls.netlify.app/og.jpg">
 <meta property="og:url" content="https://swejewls.netlify.app/">
@@ -57,7 +57,10 @@
     <div class="hero__edge hero__edge--l" aria-hidden="true">Cuban link &middot; pavé &middot; boxlås</div>
     <div class="hero__edge hero__edge--r" aria-hidden="true">Silver / Guld &mdash; N&deg; 01&ndash;03</div>
     <div class="hero__foot">
-      <p class="hero__lead"><span class="split-lines">Iced kedjor <em>&amp;</em> armband.<br>Blir inte grön. Känns äkta.</span></p>
+      <div class="hero__copy">
+        <p class="hero__where mono">Endast Stockholm &middot; vi möts upp</p>
+        <p class="hero__lead"><span class="split-lines">Iced kedjor <em>&amp;</em> armband.<br>Blir inte grön. Känns äkta.</span></p>
+      </div>
       <a class="hero__from magnetic" href="#kollektion" data-scroll>
         <span class="magnetic__inner"><span class="mono">Från</span> <b>250 kr</b></span>
       </a>
@@ -148,7 +151,7 @@
 
   <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
-      <span>Iced Cuban</span><i>&#9670;</i><span>Blir inte grön</span><i>&#9670;</i><span>Inte plast</span><i>&#9670;</i><span>Silver 250 kr</span><i>&#9670;</i><span>Guld 300 kr</span><i>&#9670;</i><span>Halsband 350 kr</span><i>&#9670;</i>
+      <span>Iced Cuban</span><i>&#9670;</i><span>Blir inte grön</span><i>&#9670;</i><span>Inte plast</span><i>&#9670;</i><span>Silver 250 kr</span><i>&#9670;</i><span>Guld 300 kr</span><i>&#9670;</i><span>Halsband 350 kr</span><i>&#9670;</i><span>Möts upp i Stockholm</span><i>&#9670;</i>
     </div>
   </div>
 
@@ -192,7 +195,8 @@
     <div class="order__inner">
       <p class="eyebrow mono">Beställ</p>
       <h2 class="order__title split-chars">Skicka ett sms.</h2>
-      <p class="order__lead">Lägg det du vill ha i korgen och skicka beställningen som sms. Säljaren svarar och bekräftar betalning och leverans.</p>
+      <p class="order__lead">Lägg det du vill ha i korgen och skicka beställningen som sms. Säljaren svarar och bestämmer tid och plats med dig.</p>
+      <p class="where"><span class="where__k mono">Endast</span><b class="where__city">Stockholm</b><span class="where__v">Vi möts upp i Stockholm. Ingen frakt.</span></p>
       <div class="order__number">
         <span class="order__digits" id="phoneDigits"><span class="metal-gold">076-328</span> <span class="metal-ice">20 09</span></span>
         <button class="copy mono" type="button" data-copy="076-328 20 09">Kopiera nummer</button>
@@ -210,6 +214,7 @@
     <footer class="foot">
       <span class="foot__logo" data-logo="horizontal"></span>
       <p class="mono">Stenarna är simulerade diamanter, inte äkta.</p>
+      <p class="mono">Endast Stockholm &middot; vi möts upp</p>
       <p class="mono">&copy; <span id="year">2026</span> SweJewls &middot; 076-328 20 09</p>
     </footer>
   </section>
@@ -228,7 +233,8 @@
       <label for="orderName">Ditt namn</label>
       <input id="orderName" name="name" type="text" autocomplete="name" placeholder="För- och efternamn">
       <label for="orderNote">Meddelande <span>(valfritt)</span></label>
-      <textarea id="orderNote" name="note" rows="2" placeholder="Leverans, upphämtning, frågor"></textarea>
+      <textarea id="orderNote" name="note" rows="2" placeholder="Var i Stockholm vill du mötas? Frågor?"></textarea>
+      <p class="cart__where mono">Möts upp i Stockholm &middot; ingen frakt</p>
       <div class="cart__total"><span class="mono">Totalt</span><b id="cartTotal">0 kr</b></div>
       <a class="btn btn--gold btn--wide" id="smsLink" href="sms:+46763282009"><span class="magnetic__inner">Skicka beställning som sms</span></a>
       <button class="btn btn--ghost btn--wide" type="button" id="copyOrder">Kopiera beställningen</button>
