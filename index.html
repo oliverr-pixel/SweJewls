@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SweJewls</title>
+<meta name="description" content="Iced Cuban-kedjor och armband. Diamantsilverarmband 250 kr, guldarmband 300 kr, halsband 350 kr. Blir inte grön, inte plast. Beställ via SMS: 076-328 20 09.">
+<meta name="theme-color" content="#06070A">
+<meta property="og:title" content="SweJewls — iced kedjor & armband">
+<meta property="og:description" content="Inte äkta diamanter. Äkta känsla. Silverarmband 250 kr · Guldarmband 300 kr · Halsband 350 kr.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="./og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Martian+Mono:wght@300;400;500&family=Schibsted+Grotesk:wght@400;500;700&display=swap">
+</head>
+<body>
+<!--SWJ:BODY-START-->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__mark" data-logo="mark"></div>
+  <div class="loader__num"><span id="loaderNum">000</span><small>%</small></div>
+  <div class="loader__bar"><i id="loaderBar"></i></div>
+  <p class="loader__cap">Iced Cuban &middot; kedjor &amp; armband</p>
+</div>
+<div class="letterbox" aria-hidden="true"><i></i><i></i></div>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+
+<div class="cursor" aria-hidden="true">
+  <div class="cursor__ring"><span class="cursor__label"></span></div>
+  <div class="cursor__dot"></div>
+</div>
+
+<header class="nav">
+  <a class="nav__logo" href="#top" data-scroll aria-label="SweJewls, till toppen"><span data-logo="horizontal"></span></a>
+  <nav class="nav__links" aria-label="Huvudmeny">
+    <a href="#kollektion" data-scroll>Kollektion</a>
+    <a href="#kvalitet" data-scroll>Kvalitet</a>
+    <a href="#irl" data-scroll>IRL</a>
+    <a href="#bestall" data-scroll>Beställ</a>
+  </nav>
+  <button class="nav__cart magnetic" id="cartBtn" type="button" aria-haspopup="dialog" aria-controls="cart" aria-expanded="false">
+    <span class="magnetic__inner">Korg <span class="nav__count" id="cartCount">0</span></span>
+  </button>
+</header>
+
+<main id="main">
+  <!-- 01 · Hero -->
+  <section class="hero" id="top" data-section="hero" data-cursor="Dra">
+    <h1 class="hero__title"><span class="hero__fallback" data-logo="stacked"></span><span class="sr-only">SweJewls, iced kedjor och armband</span></h1>
+    <div class="hero__edge hero__edge--l" aria-hidden="true">Cuban link &middot; pavé &middot; boxlås</div>
+    <div class="hero__edge hero__edge--r" aria-hidden="true">Silver / Guld &mdash; N&deg; 01&ndash;03</div>
+    <div class="hero__foot">
+      <p class="hero__lead"><span class="split-lines">Iced kedjor <em>&amp;</em> armband.<br>Blir inte grön. Känns äkta.</span></p>
+      <a class="hero__from magnetic" href="#kollektion" data-scroll>
+        <span class="magnetic__inner"><span class="mono">Från</span> <b>250 kr</b></span>
+      </a>
+      <div class="hero__scroll" aria-hidden="true"><span class="mono">Scrolla</span><i></i></div>
+    </div>
+  </section>
+
+  <!-- 02 · Manifest -->
+  <section class="manifest" id="manifest" data-section="manifest">
+    <div class="manifest__pin">
+      <p class="eyebrow mono">Ärligt talat</p>
+      <h2 class="manifest__title">
+        <span class="manifest__line" data-words>Inte äkta diamanter.</span>
+        <span class="manifest__line manifest__line--gold" data-words><em>Äkta känsla.</em></span>
+      </h2>
+      <p class="manifest__note" data-words>Stenarna är inte riktiga diamanter, och det säger vi rakt ut. Kvaliteten är bra, du blir inte grön av dem och de känns som den äkta varan. Inte plast.</p>
+    </div>
+  </section>
+
+  <!-- 03 · Kollektion -->
+  <section class="collection" id="kollektion" data-section="collection">
+    <div class="collection__pin">
+      <div class="collection__rail" aria-hidden="true">
+        <span class="mono collection__count"><b id="colIndex">01</b> / 03</span>
+        <span class="collection__track"><i id="colTrack"></i></span>
+      </div>
+
+      <div class="collection__stage">
+        <div class="collection__price" aria-hidden="true">
+          <span class="odo" id="odo"></span><span class="collection__kr">kr</span>
+        </div>
+
+        <article class="product" data-product="silver" aria-labelledby="p-silver">
+          <p class="product__no mono">01 &mdash; Armband</p>
+          <h3 class="product__name" id="p-silver"><span class="metal-ice">Diamant&shy;silver&shy;armband</span></h3>
+          <p class="product__price"><span class="sr-only">Pris: </span>250 kr</p>
+          <ul class="product__specs mono">
+            <li>Cuban link, iced runt hela</li>
+            <li>Silverfärgad</li>
+            <li>Boxlås</li>
+          </ul>
+          <button class="btn btn--gold magnetic" type="button" data-add="silver"><span class="magnetic__inner">Lägg i korgen <span class="btn__price">250 kr</span></span></button>
+        </article>
+
+        <article class="product" data-product="gold" aria-labelledby="p-gold">
+          <p class="product__no mono">02 &mdash; Armband</p>
+          <h3 class="product__name" id="p-gold"><span class="metal-gold">Guldarmband</span></h3>
+          <p class="product__price"><span class="sr-only">Pris: </span>300 kr</p>
+          <ul class="product__specs mono">
+            <li>Cuban link, iced runt hela</li>
+            <li>Guldfärgad</li>
+            <li>Boxlås</li>
+          </ul>
+          <button class="btn btn--gold magnetic" type="button" data-add="gold"><span class="magnetic__inner">Lägg i korgen <span class="btn__price">300 kr</span></span></button>
+        </article>
+
+        <article class="product" data-product="necklace" aria-labelledby="p-necklace">
+          <p class="product__no mono">03 &mdash; Kedja</p>
+          <h3 class="product__name" id="p-necklace"><span class="metal-duo">Halsband</span></h3>
+          <p class="product__price"><span class="sr-only">Pris: </span>350 kr</p>
+          <div class="finish" role="radiogroup" aria-label="Välj färg på halsbandet">
+            <button class="finish__opt" type="button" role="radio" aria-checked="true" data-finish="Silver"><i class="swatch swatch--ice"></i>Silver</button>
+            <button class="finish__opt" type="button" role="radio" aria-checked="false" data-finish="Guld"><i class="swatch swatch--gold"></i>Guld</button>
+          </div>
+          <button class="btn btn--gold magnetic" type="button" data-add="necklace"><span class="magnetic__inner">Lägg i korgen <span class="btn__price">350 kr</span></span></button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · Kvalitet -->
+  <section class="anatomy" id="kvalitet" data-section="anatomy">
+    <div class="anatomy__pin">
+      <div class="anatomy__head">
+        <p class="eyebrow mono">Kvalitet</p>
+        <h2 class="anatomy__title split-chars">Kvalitet du känner.</h2>
+      </div>
+      <ol class="callouts">
+        <li class="callout" data-anchor="0"><span class="callout__k mono">A</span><b>Blir inte grön</b><span>Lämnar inga gröna märken på huden.</span></li>
+        <li class="callout" data-anchor="1"><span class="callout__k mono">B</span><b>Inte plast</b><span>Tyngd och känsla som den äkta varan.</span></li>
+        <li class="callout" data-anchor="2"><span class="callout__k mono">C</span><b>Iced runt hela</b><span>Stenar på varje länk, hela vägen runt.</span></li>
+        <li class="callout" data-anchor="3"><span class="callout__k mono">D</span><b>Boxlås</b><span>Stängs med ett stadigt boxlås.</span></li>
+      </ol>
+      <svg class="leaders" aria-hidden="true"><path></path><path></path><path></path><path></path></svg>
+      <span class="anchor-dot" aria-hidden="true"></span><span class="anchor-dot" aria-hidden="true"></span><span class="anchor-dot" aria-hidden="true"></span><span class="anchor-dot" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Iced Cuban</span><i>&#9670;</i><span>Blir inte grön</span><i>&#9670;</i><span>Inte plast</span><i>&#9670;</i><span>Silver 250 kr</span><i>&#9670;</i><span>Guld 300 kr</span><i>&#9670;</i><span>Halsband 350 kr</span><i>&#9670;</i>
+    </div>
+  </div>
+
+  <!-- 05 · IRL -->
+  <section class="irl" id="irl" data-section="irl">
+    <div class="irl__pin">
+      <div class="irl__head">
+        <p class="eyebrow mono">IRL</p>
+        <h2 class="irl__title split-chars">Inga filter.</h2>
+        <p class="irl__sub">Riktiga klipp av riktiga armband. Så här ser de ut på handleden.</p>
+      </div>
+      <div class="reel" id="reel">
+        <div class="reel__ring">
+          <figure class="reel__card tilt" data-cursor="IRL">
+            <video muted loop playsinline preload="none" poster="./media/stack-closeup.jpg" data-src="./media/stack-closeup.mp4"></video>
+            <figcaption class="mono">Guld + silver &middot; stack</figcaption>
+          </figure>
+          <figure class="reel__card tilt" data-cursor="IRL">
+            <video muted loop playsinline preload="none" poster="./media/guld-trappa.jpg" data-src="./media/guld-trappa.mp4"></video>
+            <figcaption class="mono">Guldarmbandet</figcaption>
+          </figure>
+          <figure class="reel__card tilt" data-cursor="IRL">
+            <img src="./media/stack-bil.jpg" alt="Guld- och silverarmband på samma handled, fotograferat i en bil på natten" loading="lazy" decoding="async">
+            <figcaption class="mono">Nattstack &middot; i bilen</figcaption>
+          </figure>
+          <figure class="reel__card tilt" data-cursor="IRL">
+            <video muted loop playsinline preload="none" poster="./media/stack-natt.jpg" data-src="./media/stack-natt.mp4"></video>
+            <figcaption class="mono">Ute i stan</figcaption>
+          </figure>
+          <figure class="reel__card tilt" data-cursor="IRL">
+            <video muted loop playsinline preload="none" poster="./media/silver-svart-bil.jpg" data-src="./media/silver-svart-bil.mp4"></video>
+            <figcaption class="mono">Silver i solen</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · Beställ -->
+  <section class="order" id="bestall" data-section="order">
+    <div class="order__inner">
+      <p class="eyebrow mono">Beställ</p>
+      <h2 class="order__title split-chars">Skicka ett sms.</h2>
+      <p class="order__lead">Lägg det du vill ha i korgen och skicka beställningen som sms. Säljaren svarar och bekräftar betalning och leverans.</p>
+      <div class="order__number">
+        <span class="order__digits" id="phoneDigits"><span class="metal-gold">076-328</span> <span class="metal-ice">20 09</span></span>
+        <button class="copy mono" type="button" data-copy="076-328 20 09">Kopiera nummer</button>
+      </div>
+      <div class="order__actions">
+        <button class="btn btn--gold magnetic" type="button" data-open-cart><span class="magnetic__inner">Visa korgen <span class="btn__price" data-cart-total>0 kr</span></span></button>
+        <a class="btn btn--ghost magnetic" href="tel:+46763282009"><span class="magnetic__inner">Ring 076-328 20 09</span></a>
+      </div>
+      <ul class="pricelist">
+        <li><span>Diamantsilverarmband</span><i></i><b>250 kr</b><button type="button" class="pricelist__add mono" data-add="silver" aria-label="Lägg diamantsilverarmband i korgen">+ Lägg till</button></li>
+        <li><span>Guldarmband</span><i></i><b>300 kr</b><button type="button" class="pricelist__add mono" data-add="gold" aria-label="Lägg guldarmband i korgen">+ Lägg till</button></li>
+        <li><span>Halsband</span><i></i><b>350 kr</b><button type="button" class="pricelist__add mono" data-add="necklace" aria-label="Lägg halsband i korgen">+ Lägg till</button></li>
+      </ul>
+    </div>
+    <footer class="foot">
+      <span class="foot__logo" data-logo="horizontal"></span>
+      <p class="mono">Stenarna är simulerade diamanter, inte äkta.</p>
+      <p class="mono">&copy; <span id="year">2026</span> SweJewls &middot; 076-328 20 09</p>
+    </footer>
+  </section>
+</main>
+
+<aside class="cart" id="cart" role="dialog" aria-modal="true" aria-labelledby="cartTitle" hidden>
+  <div class="cart__scrim" data-close-cart></div>
+  <div class="cart__panel">
+    <div class="cart__head">
+      <h2 id="cartTitle">Korgen</h2>
+      <button class="cart__close mono" type="button" data-close-cart>Stäng</button>
+    </div>
+    <ul class="cart__items" id="cartItems"></ul>
+    <p class="cart__empty" id="cartEmpty">Korgen är tom. Lägg till ett armband eller halsband.</p>
+    <form class="cart__form" id="cartForm" novalidate>
+      <label for="orderName">Ditt namn</label>
+      <input id="orderName" name="name" type="text" autocomplete="name" placeholder="För- och efternamn">
+      <label for="orderNote">Meddelande <span>(valfritt)</span></label>
+      <textarea id="orderNote" name="note" rows="2" placeholder="Leverans, upphämtning, frågor"></textarea>
+      <div class="cart__total"><span class="mono">Totalt</span><b id="cartTotal">0 kr</b></div>
+      <a class="btn btn--gold btn--wide" id="smsLink" href="sms:+46763282009"><span class="magnetic__inner">Skicka beställning som sms</span></a>
+      <button class="btn btn--ghost btn--wide" type="button" id="copyOrder">Kopiera beställningen</button>
+      <p class="cart__hint">Sms:et går till <b class="selectable">076-328 20 09</b>. Fungerar inte sms-knappen på din enhet, kopiera beställningen och skicka den själv.</p>
+    </form>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<!--SWJ:BODY-END-->
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
