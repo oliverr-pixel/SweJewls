@@ -8,7 +8,9 @@ Webbplats för SweJewls: iced Cuban-kedjor och armband. Hela sidan är en intera
 | Guldarmband | 300 kr |
 | Halsband (silver eller guld) | 350 kr |
 
-Beställning sker via sms till **076-328 20 09**. Kunden lägger varor i korgen och trycker på *Skicka beställning som sms*. Då öppnas ett färdigskrivet sms med varor, totalsumma och namn.
+Beställning sker via sms till **076-328 20 09**. Kunden lägger varor i korgen och trycker på *Skicka beställning som sms*. Då öppnas ett färdigskrivet sms med varor, totalsumma, namn och valt betalsätt.
+
+Köp sker bara i Stockholm: säljaren och kunden möts upp, ingen frakt. Betalning med **Swish eller kontant**.
 
 ## Kom igång
 

@@ -29,6 +29,8 @@ export function initCart({ lenis, getFinish, reduced }) {
   const nameIn = document.getElementById('orderName');
   const noteIn = document.getElementById('orderNote');
   const cartBtn = document.getElementById('cartBtn');
+  const scroller = document.getElementById('cartScroll');
+  const payment = () => root.querySelector('input[name="pay"]:checked')?.value || '';
   let lastFocus = null;
 
   const total = () => items.reduce((s, i) => s + PRODUCTS[i.id].price * i.qty, 0);
@@ -43,6 +45,7 @@ export function initCart({ lenis, getFinish, reduced }) {
     const name = nameIn.value.trim();
     const note = noteIn.value.trim();
     if (name) txt += `\nNamn: ${name}`;
+    if (payment()) txt += `\nBetalning: ${payment()}`;
     if (note) txt += `\n${note}`;
     return txt;
   }
@@ -124,6 +127,7 @@ export function initCart({ lenis, getFinish, reduced }) {
     if (!root.hidden) return;
     lastFocus = document.activeElement;
     root.hidden = false;
+    scroller.scrollTop = 0;
     cartBtn.setAttribute('aria-expanded', 'true');
     lenis?.stop();
     document.documentElement.style.overflow = 'hidden';
@@ -178,6 +182,7 @@ export function initCart({ lenis, getFinish, reduced }) {
     toast(ok ? 'Beställningen är kopierad' : 'Kunde inte kopiera. Markera texten själv.');
   });
   nameIn.addEventListener('input', updateLink);
+  root.querySelectorAll('input[name="pay"]').forEach((r) => r.addEventListener('change', updateLink));
   noteIn.addEventListener('input', updateLink);
   document.getElementById('cartForm').addEventListener('submit', (e) => e.preventDefault());
 
