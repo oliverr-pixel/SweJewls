@@ -21,6 +21,13 @@ npm run preview   # testa bygget lokalt
 
 Lägg upp innehållet i `dist/` på valfritt webbhotell (Netlify, Vercel, GitHub Pages, one.com …). Sökvägarna är relativa, så sajten fungerar även i en undermapp.
 
+### Netlify
+
+`netlify.toml` innehåller redan inställningarna (bygg med `npm run build`, publicera `dist`, Node 22).
+
+- **Snabbast:** bygg med `npm run build` och dra mappen `dist/` (eller en zip av den) till <https://app.netlify.com/drop>.
+- **Med automatisk uppdatering:** i Netlify väljer du *Add new project → Import an existing project → GitHub* och väljer repot. Netlify läser `netlify.toml` och bygger om sajten vid varje push.
+
 ## Ändra innehåll
 
 | Vad | Var |
