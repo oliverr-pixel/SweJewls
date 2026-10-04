@@ -42,10 +42,16 @@ export function initCart({ lenis, getFinish, reduced, canScroll = () => true }) 
   const noteIn = document.getElementById('orderNote');
   const cartBtn = document.getElementById('cartBtn');
   const scroller = document.getElementById('cartScroll');
+  const status = document.getElementById('cartStatus');
+  const manual = document.getElementById('cartManual');
+  const orderText = document.getElementById('orderText');
   const html = document.documentElement;
   const payment = () => root.querySelector('input[name="pay"]:checked')?.value || '';
   let lastFocus = null;
   let state = 'closed'; // closed | open | closing
+  let openedAt = 0;
+  const label = (i) => `${PRODUCTS[i.id].name}${i.finish ? ` ${i.finish.toLowerCase()}` : ''}`;
+  const announce = (msg) => { status.textContent = ''; requestAnimationFrame(() => { status.textContent = msg; }); };
 
   const total = () => items.reduce((s, i) => s + PRODUCTS[i.id].price * i.qty, 0);
   const count = () => items.reduce((s, i) => s + i.qty, 0);
@@ -66,7 +72,11 @@ export function initCart({ lenis, getFinish, reduced, canScroll = () => true }) 
   }
 
   function updateLink() {
-    sms.href = `sms:${PHONE.e164}?&body=${encodeURIComponent(body())}`;
+    let text = body();
+    if (!manual.hidden) orderText.value = text;
+    // a lone surrogate (broken emoji) would make encodeURIComponent throw
+    text = text.replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(^|[^\uD800-\uDBFF])[\uDC00-\uDFFF]/g, '$1\uFFFD');
+    sms.href = `sms:${PHONE.e164}?&body=${encodeURIComponent(text)}`;
   }
 
   // fade the bottom edge while there is more to scroll to
@@ -86,14 +96,14 @@ export function initCart({ lenis, getFinish, reduced, canScroll = () => true }) 
       const li = document.createElement('li');
       li.className = 'cart__item';
       li.innerHTML = `
-        <div><h3>${p.name}</h3><span class="mono">${p.kind}${i.finish ? ` · ${i.finish}` : ''} · ${formatKr(p.price)}/st</span></div>
+        <div><h3>${p.display || p.name}</h3><span class="mono">${p.kind}${i.finish ? ` · ${i.finish}` : ''} · ${formatKr(p.price)}/st</span></div>
         <b>${formatKr(p.price * i.qty)}</b>
-        <div class="qty" role="group" aria-label="Antal ${p.name}${i.finish ? ` ${i.finish.toLowerCase()}` : ''}">
+        <div class="qty" role="group" aria-label="Antal ${label(i)}">
           <button type="button" data-dec="${idx}" aria-label="En mindre">&minus;</button>
-          <output aria-live="polite">${i.qty}</output>
-          <button type="button" data-inc="${idx}" aria-label="En till"${i.qty >= MAX_QTY ? ' disabled' : ''}>+</button>
+          <output>${i.qty}</output>
+          <button type="button" data-inc="${idx}" aria-label="En till"${i.qty >= MAX_QTY ? ' aria-disabled="true"' : ''}>+</button>
         </div>
-        <button type="button" class="remove mono" data-rm="${idx}">Ta bort</button>`;
+        <button type="button" class="remove mono" data-rm="${idx}" aria-label="Ta bort ${label(i)}">Ta bort</button>`;
       list.appendChild(li);
     });
     const any = items.length > 0;
@@ -157,6 +167,7 @@ export function initCart({ lenis, getFinish, reduced, canScroll = () => true }) 
     state = 'open';
     if (wasClosed) {
       lastFocus = document.activeElement;
+      openedAt = performance.now();
       root.hidden = false;
       scroller.scrollTop = 0;
       panel.scrollTop = 0;
@@ -199,25 +210,39 @@ export function initCart({ lenis, getFinish, reduced, canScroll = () => true }) 
     const addBtn = e.target.closest('[data-add]');
     if (addBtn) { add(addBtn.dataset.add, addBtn); return; }
     if (e.target.closest('[data-open-cart]') || e.target.closest('#cartBtn')) { open(); return; }
-    if (e.target.closest('[data-close-cart]')) { close(); return; }
+    if (e.target.closest('[data-close-cart]')) {
+      // a double-tap on "Korg" must not land its second tap on "Stäng"
+      if (e.detail > 0 && performance.now() - openedAt < 450) return;
+      close();
+      return;
+    }
     const ctl = e.target.closest('[data-inc], [data-dec], [data-rm]');
     if (!ctl) return;
     const kind = 'inc' in ctl.dataset ? 'inc' : 'dec' in ctl.dataset ? 'dec' : 'rm';
     const idx = Number(ctl.dataset[kind]);
     const it = items[idx];
     if (!it) return;
-    if (kind === 'inc') it.qty = Math.min(MAX_QTY, it.qty + 1);
+    // at the limit + stays focusable but does nothing, so repeated Enter cannot start counting down
+    if (kind === 'inc' && it.qty >= MAX_QTY) { announce(`Max ${MAX_QTY} st ${label(it)}`); return; }
+    if (kind === 'inc') it.qty += 1;
     if (kind === 'dec') it.qty -= 1;
     const removed = kind === 'rm' || it.qty <= 0;
+    const what = label(it);
     if (removed) items.splice(idx, 1);
     save(items);
     render();
-    // the list was rebuilt; put focus back on the same control (or its neighbour)
-    if (state === 'open') {
-      const sel = removed ? `[data-rm="${Math.min(idx, items.length - 1)}"]` : `[data-${kind}="${idx}"]`;
-      const target = list.querySelector(sel);
-      (target && !target.disabled ? target : root.querySelector('.cart__close')).focus({ preventScroll: true });
+    announce(removed ? `${what} borttagen ur korgen` : `Antal ${what}: ${it.qty}`);
+    // the list was rebuilt: keep focus on the same control, or on the list itself after a removal
+    // so a repeated Enter cannot delete the next product
+    if (state !== 'open') return;
+    if (removed) {
+      list.focus({ preventScroll: true });
+      list.children[Math.min(idx, list.children.length - 1)]?.scrollIntoView({ block: 'nearest' });
+      return;
     }
+    const target = list.querySelector(`[data-${kind}="${idx}"]`);
+    target?.focus({ preventScroll: true });
+    target?.scrollIntoView({ block: 'nearest' });
   });
 
   sms.addEventListener('click', (e) => {
@@ -227,7 +252,14 @@ export function initCart({ lenis, getFinish, reduced, canScroll = () => true }) 
   copyBtn.addEventListener('click', async () => {
     if (!items.length) return;
     const ok = await copyText(`${body()}\n\nSkickas till ${PHONE.display}`);
-    toast(ok ? 'Beställningen är kopierad' : 'Kunde inte kopiera. Markera texten själv.');
+    if (ok) { toast('Beställningen är kopierad'); return; }
+    // show the text so it can be copied by hand
+    manual.hidden = false;
+    orderText.value = body();
+    orderText.focus({ preventScroll: true });
+    orderText.select();
+    orderText.scrollIntoView({ block: 'nearest' });
+    toast('Kunde inte kopiera. Markera texten i rutan.');
   });
   nameIn.addEventListener('input', updateLink);
   root.querySelectorAll('input[name="pay"]').forEach((r) => r.addEventListener('change', updateLink));
@@ -235,7 +267,16 @@ export function initCart({ lenis, getFinish, reduced, canScroll = () => true }) 
   document.getElementById('cartForm').addEventListener('submit', (e) => e.preventDefault());
   scroller.addEventListener('scroll', updateMore, { passive: true });
   panel.addEventListener('scroll', updateMore, { passive: true });
-  window.addEventListener('resize', () => { if (state !== 'closed') { updateMore(); updateFootHeight(); } });
+  window.addEventListener('resize', () => {
+    if (state === 'closed') return;
+    updateMore();
+    updateFootHeight();
+    // after a rotation or keyboard switches layout mode, keep the focused field in view
+    const a = document.activeElement;
+    if (a && a !== panel && panel.contains(a)) requestAnimationFrame(() => a.scrollIntoView({ block: 'nearest' }));
+  });
+  // another open tab changed the cart: pick it up instead of overwriting it later
+  window.addEventListener('storage', (e) => { if (e.key === KEY) { items = load(); render(); } });
 
   // Escape and the Tab trap work wherever focus is, even after clicking plain text in the panel
   document.addEventListener('keydown', (e) => {

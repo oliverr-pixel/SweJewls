@@ -4,6 +4,7 @@ export async function copyText(text) {
     await navigator.clipboard.writeText(text);
     return true;
   } catch {
+    const prev = document.activeElement;
     const ta = document.createElement('textarea');
     ta.value = text;
     ta.setAttribute('readonly', '');
@@ -14,6 +15,7 @@ export async function copyText(text) {
     let ok = false;
     try { ok = document.execCommand('copy'); } catch { ok = false; }
     ta.remove();
+    prev?.focus?.({ preventScroll: true });
     return ok;
   }
 }

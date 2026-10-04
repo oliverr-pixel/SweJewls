@@ -231,7 +231,8 @@
       <button class="cart__close mono" type="button" data-close-cart>Stäng</button>
     </div>
     <div class="cart__scroll" id="cartScroll">
-      <ul class="cart__items" id="cartItems"></ul>
+      <ul class="cart__items" id="cartItems" tabindex="-1" aria-label="Varor i korgen"></ul>
+      <p class="sr-only" id="cartStatus" role="status" aria-live="polite"></p>
       <p class="cart__empty" id="cartEmpty">Korgen är tom. Lägg till ett armband eller halsband.</p>
       <form class="cart__form" id="cartForm" novalidate>
         <label for="orderName">Ditt namn</label>
@@ -246,6 +247,10 @@
         <label for="orderNote">Meddelande <span>(valfritt)</span></label>
         <textarea id="orderNote" name="note" rows="2" placeholder="Var i Stockholm vill du mötas? Frågor?"></textarea>
         <p class="cart__note">Vi möts upp i Stockholm, ingen frakt. Du betalar med Swish eller kontant.</p>
+        <div class="cart__manual" id="cartManual" hidden>
+          <label for="orderText">Din beställning, markera och kopiera</label>
+          <textarea id="orderText" readonly rows="6"></textarea>
+        </div>
         <p class="cart__hint">Sms:et går till <b class="selectable">076-328 20 09</b>. Fungerar inte sms-knappen på din enhet, kopiera beställningen och skicka den själv.</p>
       </form>
     </div>
