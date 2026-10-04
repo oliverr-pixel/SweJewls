@@ -74,8 +74,8 @@ export function initCart({ lenis, getFinish, reduced, canScroll = () => true }) 
   function updateLink() {
     let text = body();
     if (!manual.hidden) orderText.value = text;
-    // a lone surrogate (broken emoji) would make encodeURIComponent throw
-    text = text.replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(^|[^\uD800-\uDBFF])[\uDC00-\uDFFF]/g, '$1\uFFFD');
+    // drop a lone surrogate (half an emoji): encodeURIComponent would throw on it
+    text = text.replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(^|[^\uD800-\uDBFF])[\uDC00-\uDFFF]/g, '$1');
     sms.href = `sms:${PHONE.e164}?&body=${encodeURIComponent(text)}`;
   }
 
